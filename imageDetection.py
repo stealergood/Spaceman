@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 
-def detect_button(image, button_template, threshold=0.7):
+def detect_button(image, button_template, threshold):
     # Get the width and height of the button template
     w, h = button_template.shape[1], button_template.shape[0]
 
