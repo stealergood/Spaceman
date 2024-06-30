@@ -3,7 +3,7 @@ from imageDetection import detect_button
 
 # Load the images
 main_template = cv2.imread("images/main.png", cv2.IMREAD_UNCHANGED)
-setupbet_template = cv2.imread("images/finishsetup.png", cv2.IMREAD_UNCHANGED)
+setupbet_template = cv2.imread("images/notfinish.png", cv2.IMREAD_UNCHANGED)
 
 # Detect the button
 positions, image = detect_button(main_template, setupbet_template, 0.9)

@@ -1,5 +1,4 @@
 import cv2
-import keyboard
 import pyautogui
 import time
 import captureScreen
@@ -13,7 +12,7 @@ multipler_template = cv2.imread('./images/multipler.png')
 win_template = cv2.imread('./images/gamewin.png')
 bet_template = cv2.imread('./images/bet.png')
 setupbet_template = cv2.imread('./images/setupbet.png')
-finishsetup_template = cv2.imread('./images/finishsetup.png')
+finishsetup_template = cv2.imread('./images/notfinish.png')
 
 def run_bot(input_round, mode):
     round = 0
@@ -22,13 +21,14 @@ def run_bot(input_round, mode):
     while running:
         if round == input_round:
             print("Finished all rounds.")
+            running = False
             break
         
         screen_image = captureScreen.capture_screen()
         finishsetup_positions = imageDetection.detect_button(screen_image, finishsetup_template, 0.9)
-        if not finishsetup_positions:
+        if finishsetup_positions:
+            print("Finish setup not found. Setting up auto bet...")
             setup()
-            continue
         
         screen_image = captureScreen.capture_screen()
         crash_positions = imageDetection.detect_button(screen_image, crash_template, 0.7)
@@ -41,7 +41,7 @@ def run_bot(input_round, mode):
             round += 1
             print("Clicked Confirm button.")
 
-        if cv2.waitKey(1) & 0xFF == ord('q') or keyboard.is_pressed('q'):
+        if cv2.waitKey(1) & 0xFF == ord('q'):
             break
 
     cv2.destroyAllWindows()
