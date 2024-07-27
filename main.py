@@ -24,7 +24,7 @@ def click_button(button_positions, num_positions):
         center_x = x + w // 2
         center_y = y + h // 2
 
-        pyautogui.moveTo(center_x, center_y, duration=0.2)  # Adding a small delay
+        pyautogui.moveTo(center_x, center_y, duration=0.2)
         pyautogui.click()
         time.sleep(0.3)
 
